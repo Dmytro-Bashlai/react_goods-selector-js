@@ -16,8 +16,6 @@ export const goods = [
   'Garlic',
 ];
 
-const goodsWithId = goods.map((name, index) => ({ name, index }));
-
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
@@ -45,30 +43,28 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goodsWithId.map(good => {
-            const isSelected = selectedGood === good.name;
+          {goods.map(good => {
+            const isSelected = selectedGood === good;
 
             return (
               <tr
                 data-cy="Good"
                 className={cn({ 'has-background-success-light': isSelected })}
-                key={good.index}
+                key={good}
               >
                 <td>
                   <button
                     data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={cn('button', { 'is-info': isSelected })}
-                    onClick={() =>
-                      setSelectedGood(isSelected ? null : good.name)
-                    }
+                    onClick={() => setSelectedGood(isSelected ? null : good)}
                   >
                     {isSelected ? '-' : '+'}
                   </button>
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
-                  {good.name}
+                  {good}
                 </td>
               </tr>
             );
